@@ -8,7 +8,7 @@ import { LuFlame, LuStar, LuTimer } from "react-icons/lu";
 
 const getWorkouts = async () => {
   try {
-    const response = await fetch("https://api.api-store.workers.dev/api/fitlog", {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_FITLOG_API}`, {
       cache: "no-store",
     });
     const data = await response.json();
