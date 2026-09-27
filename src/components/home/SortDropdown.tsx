@@ -14,14 +14,14 @@ const SortDropdown = ({ value, onChange }: ISortDropdownProps) => {
       <span className="text-muted">Sort By</span>
 
       <select
-        value={value}
+         value={value}
         onChange={(e) => onChange(e.target.value as TSortOption)}
         className="appearance-none bg-transparent pr-5 font-semibold text-white outline-none"
       >
-        <option value="duration">Duration</option>
-        <option value="calories">Calories</option>
-        <option value="rating">Rating</option>
-      </select>
+        <option value="duration" className="bg-black text-white">Duration</option>
+        <option value="calories" className="bg-black text-white">Calories</option>
+        <option value="rating" className="bg-black text-white">Rating</option>
+         </select>
 
       <LuChevronDown
         className="pointer-events-none absolute right-3 text-muted"
