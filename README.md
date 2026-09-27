@@ -1,36 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+FitLog — Workout Library
 
-## Getting Started
+FitLog is a dark, no-nonsense gym companion built with Next.js. Browse a library of twelve lifts, drop them into today's plan or save them for later, and watch your exercises, minutes, and calories add up in real time.
 
-First, run the development server:
+Live Link: add your deployed URL here GitHub Repository Link: https://github.com/MahedyHasan17535/Node-js
 
-```bash
+Description
+
+FitLog helps you plan and track your daily workouts without the clutter of a full fitness-tracking app. Browse a curated library of twelve exercises covering every major muscle group, view full instructions and stats for each lift, and build out a capped five-exercise plan for the day. Mark lifts as done as you complete them, save others for later, and everything persists across page reloads thanks to localStorage — no sign-up, no backend database, just a fast, focused workout companion.
+
+Technologies Used
+Next.js 16 (App Router) — routing, server components, and data fetching
+React 19 — UI and client-side state
+TypeScript — type safety across components, context, and API data
+Tailwind CSS v4 — utility-first styling with a custom dark/neon design system
+react-toastify — toast notifications for plan/save/done/remove actions
+react-icons (Lucide set) — iconography throughout the UI
+FitLog REST API — live workout data fetched at request time
+Key Features
+Full workout library — all twelve lifts from the FitLog API rendered as a responsive grid, each with a category tag, equipment line, and a duration / calories / rating stats row.
+Live navbar badges — "Plan" and "Saved" pill counters in the navbar update instantly as workouts are added or removed, both linking to /my-plan.
+Workout detail pages — a two-column layout with a full-bleed image, key-specs panel, and a numbered instructions list, plus "Add to today's plan" / "Save for later" actions with toast confirmations.
+My Plan dashboard — live Exercises / Minutes / Calories summary cards, a Today's Plan vs. Saved tab view, and per-card "View Details", "Mark as Done", and remove actions.
+Five-lift daily cap — "Add to today's plan" automatically disables once today's plan hits five workouts, preventing overload.
+Sort and search — a "Sort By" dropdown (Duration / Calories / Rating) and a name-or-tag search box, both re-filtering the library grid live.
+Persistent state — today's plan, saved list, and completed workouts are stored in localStorage, so your plan survives a page reload.
+Polished edge cases — a custom 404 page, skeleton loading animations on the home and detail routes, and empty-state messaging when a list has nothing in it yet.
+Environment Variables
+
+Create a .env.local file in the project root:
+
+NEXT_PUBLIC_FITLOG_API=https://api.api-store.workers.dev/api/fitlog
+Project Structure
+src/
+  app/
+    layout.tsx              # fonts, PlanProvider, Navbar/Footer, toasts
+    page.tsx                # home: Banner + Library section
+    loading.tsx              # home route skeleton
+    not-found.tsx            # 404 page
+    workouts/[id]/page.tsx   # workout detail page
+    workouts/[id]/loading.tsx
+    my-plan/page.tsx         # tabs, metrics, plan/saved lists
+  components/
+    shared/                  # Navbar, Footer, WorkoutCard, PlanWorkoutCard
+    home/                    # Banner, LibrarySection, LibraryGrid, SortDropdown
+    workoutDetails/          # AddToPlanButton, SaveButton
+  context/PlanContext.tsx    # today's plan / saved state + localStorage sync
+  types/workout.type.ts      # IWorkout interface
+Getting Started
+bash
+git clone https://github.com/MahedyHasan17535/Node-js.git
+cd Node-js
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000 to view the app.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+API
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Data comes from the FitLog API:
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+All workouts: https://api.api-store.workers.dev/api/fitlog
+Single workout: https://api.api-store.workers.dev/api/fitlog/:id
